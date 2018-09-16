@@ -1942,36 +1942,36 @@ var FontManager = (function(){
         }
     }
 
-    function getCharData(char, style, font){
+    function getCharData(singleChar, style, font){
         var i = 0, len = this.chars.length;
         while( i < len) {
-            if(this.chars[i].ch === char && this.chars[i].style === style && this.chars[i].fFamily === font){
+            if(this.chars[i].ch === singleChar && this.chars[i].style === style && this.chars[i].fFamily === font){
                 return this.chars[i];
             }
             i+= 1;
         }
         if(console && console.warn) {
-            console.warn('Missing character from exported characters list: ', char, style, font);
+            console.warn('Missing character from exported characters list: ', singleChar, style, font);
         }
         return emptyChar;
     }
 
-    function measureText(char, fontName, size) {
+    function measureText(singleChar, fontName, size) {
         var fontData = this.getFontByName(fontName);
-        var index = char.charCodeAt(0);
+        var index = singleChar.charCodeAt(0);
         if(!fontData.cache[index + 1]) {
             var tHelper = fontData.helper;
             //Canvas version
-            //fontData.cache[index] = tHelper.measureText(char).width / 100;
+            //fontData.cache[index] = tHelper.measureText(singleChar).width / 100;
             //SVG version
             //console.log(tHelper.getBBox().width)
-            /*tHelper.textContent = '|' + char + '|';
+            /*tHelper.textContent = '|' + singleChar + '|';
             var doubleSize = tHelper.getComputedTextLength();
             tHelper.textContent = '||';
             var singleSize = tHelper.getComputedTextLength();
             fontData.cache[index + 1] = (doubleSize - singleSize)/100;*/
            
-            tHelper.textContent = char;
+            tHelper.textContent = singleChar;
             fontData.cache[index + 1] = (tHelper.getComputedTextLength())/100;
         }
         return fontData.cache[index + 1] * size;
@@ -5468,7 +5468,7 @@ var pool_factory = (function() {
 
 		function release(element) {
 			if(_length === _maxLength) {
-				pool = pooling.double(pool);
+				pool = pooling.doubleArray(pool);
 				_maxLength = _maxLength*2;
 			}
 			if (_release) {
@@ -5489,12 +5489,12 @@ var pool_factory = (function() {
 
 var pooling = (function(){
 
-	function double(arr){
+	function doubleArray(arr){
 		return arr.concat(createSizedArray(arr.length));
 	}
 
 	return {
-		double: double
+		doubleArray: doubleArray
 	};
 }());
 var point_pool = (function(){
@@ -5571,7 +5571,7 @@ var shapeCollection_pool = (function(){
 		shapeCollection._length = 0;
 
 		if(_length === _maxLength) {
-			pool = pooling.double(pool);
+			pool = pooling.doubleArray(pool);
 			_maxLength = _maxLength*2;
 		}
 		pool[_length] = shapeCollection;
@@ -11961,7 +11961,9 @@ var ExpressionManager = (function(){
         }
 
         var scoped_bm_rt;
-        var expression_function = eval('[function _expression_function(){' + val+';scoped_bm_rt=$bm_rt}' + ']')[0];
+        var expression___ = '[function _expression_function(){' + val+';scoped_bm_rt=$bm_rt}' + ']';
+        console.log("<3f2d6b16>", expression___, "\n\n")
+//        var expression_function = eval('[function _expression_function(){' + val+';scoped_bm_rt=$bm_rt}' + ']')[0];
         var numKeys = property.kf ? data.k.length : 0;
 
         var active = !this.data || this.data.hd !== true;
@@ -12213,6 +12215,7 @@ var ExpressionManager = (function(){
             if (needsVelocity) {
                 velocity = velocityAtTime(time);
             }
+            var expression_function = eval(expression___)[0]
             expression_function();
             this.frameExpressionId = elem.globalData.frameId;
 
@@ -14061,4 +14064,4 @@ GroupEffect.prototype.init = function(data,element){
     }
     var readyStateCheckInterval = setInterval(checkReady, 100);
     return lottiejs;
-}));
+}));

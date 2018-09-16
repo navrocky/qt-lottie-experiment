@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>lottie.js</file>
         <file>lottie-polyfill.js</file>
+        <file>inattentive.json</file>
     </qresource>
 </RCC>
