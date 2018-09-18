@@ -1,3 +1,13 @@
+(function(){
+
+    var mytime = 12345;
+    var myFunc = eval("[function myFunc(){ console.log(mytime); }]")[0];
+    myFunc();
+
+
+})();
+
+
 (typeof navigator !== "undefined") && (function(root, factory) {
     if (typeof define === "function" && define.amd) {
         define(function() {
@@ -11962,8 +11972,8 @@ var ExpressionManager = (function(){
 
         var scoped_bm_rt;
         var expression___ = '[function _expression_function(){' + val+';scoped_bm_rt=$bm_rt}' + ']';
-        console.log("<3f2d6b16>", expression___, "\n\n")
-//        var expression_function = eval('[function _expression_function(){' + val+';scoped_bm_rt=$bm_rt}' + ']')[0];
+
+        var expression_function = eval('[function _expression_function(){' + val+';scoped_bm_rt=$bm_rt}' + ']')[0];
         var numKeys = property.kf ? data.k.length : 0;
 
         var active = !this.data || this.data.hd !== true;
@@ -12215,7 +12225,17 @@ var ExpressionManager = (function(){
             if (needsVelocity) {
                 velocity = velocityAtTime(time);
             }
+
+            var mytime = 10;
+            var myFunc = eval("[function myFunc(){ console.log(mytime); }]")[0];
+            myFunc();
+
+
+//            var mytime = time;
+            expression___ = expression___.replace("(time", "(mytime");
+            console.log("<3f2d6b16>", expression___, "\n\n")
             var expression_function = eval(expression___)[0]
+
             expression_function();
             this.frameExpressionId = elem.globalData.frameId;
 

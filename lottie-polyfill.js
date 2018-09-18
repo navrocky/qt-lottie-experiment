@@ -1,10 +1,27 @@
 var navigator = null
 var window = null
 var document = null
+function doBug() {
+    function initiateExpression() {
+        var time=5;
+
+        function executeExpression() {
+            time = 20;
+            var func = eval("[function(){ console.log(time); }]")[0]
+            func()
+        }
+
+        return executeExpression;
+    }
+
+    var execExpr = initiateExpression();
+    execExpr();
+
+}
 
 function setInterval(callback, interval) {
     console.log("STUB setInterval", callback, interval)
-//    callback()
+    //    callback()
 }
 
 function setTimeout(callback, interval) {
@@ -16,6 +33,8 @@ function setTimeout(callback, interval) {
 }
 
 function initialize(canvas) {
+
+    doBug();
 
     var internalNavigator = {};
     var internalWindow = {};
@@ -46,17 +65,17 @@ function initialize(canvas) {
     console.log(result.status, result.exception, JSON.stringify(window))
 
     return window.lottie
-//    function func() {
-//        console.log("Hello!")
+    //    function func() {
+    //        console.log("Hello!")
 
-//        lottie.loadAnimation({
-//          container: element, // the dom element that will contain the animation
-//          renderer: 'canvas',
-//          loop: true,
-//          autoplay: true,
-//          path: 'data.json' // the path to the animation json
-//        });
-//    }
+    //        lottie.loadAnimation({
+    //          container: element, // the dom element that will contain the animation
+    //          renderer: 'canvas',
+    //          loop: true,
+    //          autoplay: true,
+    //          path: 'data.json' // the path to the animation json
+    //        });
+    //    }
 
 }
 

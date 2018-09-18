@@ -1,5 +1,5 @@
-import QtQuick 2.11
-import QtQuick.Window 2.11
+import QtQuick 2.9
+import QtQuick.Window 2.3
 import "lottie-polyfill.js" as Lottie
 import FileIO 1.0
 
